@@ -7,7 +7,7 @@ import torchvision
 import argparse
 
 
-import data_setup, engine
+import data_setup, engine, utils
 
 parser = argparse.ArgumentParser()
 
@@ -70,6 +70,9 @@ results = engine.train_model(model=model,
 
 
 
+utils.save_checkpoint(model=model,
+                        target_dir="models",
+                        model_name="efficientnet_b0.pth")
 
 
 
