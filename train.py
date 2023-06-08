@@ -27,7 +27,7 @@ test_dir = "data/pizza_steak_sushi/test"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Get the best available weights for the model to be used in transfer learning.
-weights = torchvision.models.EfficentNet_B0_Weights.DEFAULT
+weights = torchvision.models.EfficientNet_B0_Weights.DEFAULT
 
 # Get the transforms used for the pretrained model.
 
@@ -41,7 +41,7 @@ train_dataloader, test_dataloader, class_names = data_setup.create_dataloaders(
 
 # Define the model
 
-model = torchvision.models.efficentnet_b0(weights=weights).to(device)
+model = torchvision.models.efficientnet_b0(weights=weights).to(device)
 
 # freeze the parameters of the model in the features section.
 for params in model.features.parameters():
@@ -60,9 +60,9 @@ loss_fn = nn.CrossEntropyLoss()
 
 optimizer = optim.Adam(model.parameters(),lr=LEARNING_RATE)
 
-results = engine.train(model=model,
-                        train_dataloader=train_dataloader,
-                        test_dataloader=test_dataloader,
+results = engine.train_model(model=model,
+                        train_loader=train_dataloader,
+                        test_loader=test_dataloader,
                         loss_fn=loss_fn,
                         optimizer=optimizer,
                         device=device,

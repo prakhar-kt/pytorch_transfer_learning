@@ -95,15 +95,15 @@ def test_step(model: nn.Module,
             
             acc += (yhat_labels == y).sum().item() / len(y)
 
-    loss /= len(test_loader)
-    acc /= len(test_loader)
+        loss /= len(test_loader)
+        acc /= len(test_loader)
 
     return loss, acc
 
 def train_model(model: nn.Module,
                 train_loader: torch.utils.data.DataLoader,
                 test_loader: torch.utils.data.DataLoader,
-                loss_function: nn.Module,
+                loss_fn: nn.Module,
                 optimizer: torch.optim.Optimizer,
                 device: torch.device,
                 num_epochs: int):
@@ -134,8 +134,8 @@ def train_model(model: nn.Module,
     
     for epoch in tqdm(range(num_epochs)):
 
-        train_loss, train_acc = train_step(model,train_loader,loss_function,optimizer,device)
-        test_loss, test_acc = test_step(model,test_loader,loss_function,device)
+        train_loss, train_acc = train_step(model,train_loader,loss_fn,optimizer,device)
+        test_loss, test_acc = test_step(model,test_loader,loss_fn,device)
 
         results["train_loss"].append(train_loss)
         results["train_acc"].append(train_acc)
