@@ -29,5 +29,3 @@ def save_checkpoint(model: torch.nn.Module,
     print(f"Saving model checkpoint to {model_path} ...")
 
     torch.save(model.state_dict(),model_path)
-
-    
